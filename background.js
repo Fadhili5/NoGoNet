@@ -2,7 +2,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.fingerprint) {
       console.log(`User Fingerprint: ${message.fingerprint} visited ${message.url}`);
   
-      // Store fingerprint + URL in local storage (optional)
+      // Store fingerprint + URL in local storage 
       chrome.storage.local.get({ logs: [] }, (data) => {
         data.logs.push({ fingerprint: message.fingerprint, url: message.url, time: new Date().toISOString() });
         chrome.storage.local.set({ logs: data.logs });

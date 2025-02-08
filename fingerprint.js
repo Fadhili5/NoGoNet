@@ -9,7 +9,7 @@ async function getFingerprint() {
     return result.visitorId;
 }
 
-// Send fingerprint to background script (optional)
+// Send fingerprint to background script 
 getFingerprint().then(visitorId => {
     chrome.runtime.sendMessage({ type: "FINGERPRINT", visitorId });
 });
