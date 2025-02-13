@@ -1,16 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Betting Site Detector</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Site Blocked</title>
+    <style>
+        body {
+            width: 400px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .warning-icon {
+            color: #ff0000;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .title {
+            color: #ff0000;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .message {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .details {
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .button:hover {
+            background-color: #cc0000;
+        }
+    </style>
 </head>
 <body>
-    <h2>🚨 Illegal Betting Site Detector</h2>
-    <p id="status">Monitoring sites...</p>
-    <button id="viewLogs">View Flagged Sites</button>
-    <script src="popup.js"></script>
+    <div class="warning-icon">⚠️</div>
+    <div class="title">Access Blocked</div>
+    <div class="message">This website has been blocked for your safety and security.</div>
+    <div class="details">
+        <p id="blocked-url"></p>
+        <p id="block-reason"></p>
+        <p id="timestamp"></p>
+    </div>
+    <button class="button" id="close-popup">Close</button>
+
+    <script>
+        document.getElementById('close-popup').addEventListener('click', () => {
+            window.close();
+        });
+
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const url = urlParams.get('url');
+        const reason = urlParams.get('reason');
+        
+        if (url) {
+            document.getElementById('blocked-url').textContent = `Blocked URL: ${url}`;
+        }
+        if (reason) {
+            document.getElementById('block-reason').textContent = `Reason: ${reason}`;
+        }
+        document.getElementById('timestamp').textContent = `Time: ${new Date().toLocaleString()}`;
+    </script>
 </body>
 </html>
-

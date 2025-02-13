@@ -1,44 +1,47 @@
 {
-    "manifest_version": 3,
-    "name": "Betting Site Detector",
-    "version": "1.0",
-    "permissions": ["storage", "activeTab", "scripting"],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "host_permissions": [
-      "https://*/*",
-      "http://*/*"
-    ],
-    "permissions": [
-  "storage",
-  "activeTab",
-  "scripting",
-  "webRequest",
-  "declarativeNetRequest",
-  "declarativeNetRequestWithHostAccess",
-  "declarativeNetRequestFeedback"
-],
-    "content_security_policy": {
-    "extension_pages": "script-src 'self' https://fpjscdn.net; object-src 'self'"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["fingerprint.js", "content.js"]
-      }
-    ],
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "icon16.png",
-        "48": "icon17.png",
-        "128": "icon18.png"
-      }
-    },
-    "web_accessible_resources": [{
-      "resources": ["fingerprint.js"],
+  "manifest_version": 3,
+  "name": "Illegal Site Detector",
+  "version": "1.0",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "webRequest",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "declarativeNetRequestFeedback",
+    "notifications"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*",
+    "https://api.tililtech.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["dist/bundle.js", "content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon17.png",
+      "128": "icon18.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["dist/bundle.js"],
       "matches": ["<all_urls>"]
-    }]
-  }
-  
+    }
+  ]
+}
